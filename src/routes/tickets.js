@@ -1,10 +1,9 @@
+import { create } from "../Controller/tickets/create.js"
+
 export const tickets = [
     {
         method: "POST",
         url: "/tickets",
-        controller: (request, response) => {
-            response.writeHead(201)
-            response.end("Ticket created")
-        }
+        controller: create
     }
 ]
