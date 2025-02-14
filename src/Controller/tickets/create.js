@@ -15,7 +15,6 @@ status: "open",
     }
 
 
-
     response.writeHead(201)
-    response.end("Deu bom fml")
+    response.end(JSON.stringify(ticket))
 }
