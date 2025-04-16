@@ -27,7 +27,6 @@ export class Database {
 // Quando utilizarmos o script DEV, se o db.json não existir, esse método cria ele.
 
 // O método abaixo é utilizado para inserir os dados (tickets) no banco e salvá-los. Passamos como parâmetros a tabela que irá conter esses dados e os dados em si 
-
 insert(table, data) {
     //Verificamos se o array é um array mesmo e se esse banco de dados contém o table (que é o array)
     if(Array.isArray(this.#database[table])) {
@@ -41,6 +40,12 @@ insert(table, data) {
 // Chamamos o método persist para escrever no arquivo os dados e salvá-los  
 this.#persist()
 
+}
+
+// No método abaixo, verificamos se existe a tabela com os dados e a armazenamos na variável let data. Caso exista, retornamos a tabela, caso não, retornamos um array vazio
+select(table) {
+    let data = this.#database[table] ?? []
+    return data
 }
 
 }
