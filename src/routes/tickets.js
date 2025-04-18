@@ -8,13 +8,13 @@ import { index } from "../Controller/tickets/index.js"
 export const tickets = [
     {
         method: "POST",
-        url: "/tickets",
+        path: "/tickets",
         controller: create 
         // Utilizamos o controller dessa forma, pois teríamos que criar um para cada rota aqui nesse arquivo, mas separamos eles para uma melhor organização. Nesse caso, esse controller é específico para o método POST
     },
     {
         method: "GET",
-        url: "/tickets",
+        path: "/tickets",
         controller: index
         // Controller específico para o método GET, que exibe os tickets cadastrados. 
     }
