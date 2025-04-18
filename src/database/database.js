@@ -42,9 +42,24 @@ this.#persist()
 
 }
 
-// No método abaixo, verificamos se existe a tabela com os dados e a armazenamos na variável let data. Caso exista, retornamos a tabela, caso não, retornamos um array vazio
-select(table) {
+// No método abaixo, verificamos se existe a tabela com os dados e a armazenamos na variável let data. Caso exista, retornamos a tabela, caso não, retornamos um array vazio. Além disso, passaremos o parâmetro dos filtros
+select(table, filters) {
     let data = this.#database[table] ?? []
+    
+    // Se houverem filtros
+    if(filters) {
+        // a let data (que recebeu um array) filtra cada linha da tabela 
+        data = data.filter((row) => {
+            // retorna o objeto (que seria o status que definimos no index), aplicamos nele a função entries, que retorna um array com chave e valor separados dentro dele e depois aplicamos a função some, que recebe, desestruturados e no array, a chave e o valor e verifica se em meio à todas as respostas recebidas há no mínimo uma que satisfaz o que solicitamos (closed ou open)
+            return Object.entries(filters).some(([key, value]) => {
+                // Nesse return, pegamos da linha a chave, convertemos ela para letras minúsculas (prevenção) e verificamos se nela há inclusa um valor (que também convertemos para letras minúsculas) e retornamos ele (que seria na exibição realizada pelo método GET)
+                return row[key].toLowerCase().includes(value.toLowerCase())
+            })
+            // Depois disso, se utilizarmos o método GET com um status definido, conseguiremos filtrar os open e os closed 
+        })
+    }
+
+    // Retornamos os dados 
     return data
 }
 
