@@ -27,7 +27,9 @@ if(route) {
 const routeParams = request.url.match(route.path)
 
 // Essa abaixo desestrutura as querys (grupos de parâmetros nomeados) e pega cada grupo dos parâmetros de rota
-const { query } = routeParams.groups
+const { query, ...params } = routeParams.groups
+// Aproveito também para despejar todos os parâmetros e aclopá-los à requisição, para podermos acessá-los em outros métodos
+request.params = params
 
 // Aqui pegamos a requisição e acessamos a query dela, se existir, retornaremos a query já formatada pela função, com chave e valor, caso não, retornaremos um objeto vazio, pois não há querys (parâmetros nomeados)
 request.query = query ? extractQueryParams(query) : {}

@@ -63,4 +63,21 @@ select(table, filters) {
     return data
 }
 
+update(table, id, data) {
+    // Criamos essa const para acessar a tabela desse nosso banco de dados e verificar se o id da linha que consta nesse database é igual ao id que estou procurando para atualização do ticket
+const rowIndex = this.#database[table].findIndex((row) => row.id === id)
+
+if(rowIndex > -1) {
+    // Se existir o index procurado, pegamos essa tabela e o index desestururados
+this.#database[table][rowIndex] = {
+// Aqui despejamos aqui o banco de dados e os dados pelo operador spread
+    ...this.#database[table][rowIndex], 
+    ...data // como despejamos os dados depois do banco, se houver alguma alteração ou diferença, os novos dados irão sobrescrever os do banco 
+}
+
+this.#persist() // Utilizamos o persist para salvar os novos dados (sobrescrever)
+
+}
+}
+
 }
