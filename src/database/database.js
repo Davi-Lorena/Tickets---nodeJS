@@ -80,4 +80,15 @@ this.#persist() // Utilizamos o persist para salvar os novos dados (sobrescrever
 }
 }
 
+// Criamos o método para deletar um ticket, capturando o id da mesma forma que no update e fazendo a verificação que, se esse index capturado existir, ele será removido pelo método splice e o #persist será chamado para atualizar o documento sem o referido ticket 
+delete(table, id) {
+const rowIndex = this.#database[table].findIndex((row) => row.id === id)
+
+if (rowIndex > -1) {
+    this.#database[table].splice(rowIndex, 1)
+    this.#persist()
+}
+
+}
+
 }

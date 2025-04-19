@@ -3,7 +3,7 @@ import { create } from "../Controller/tickets/create.js"
 import { index } from "../Controller/tickets/index.js"
 import { update } from "../Controller/tickets/update.js"
 import { updateStatus } from "../Controller/tickets/uptadeStatus.js"
-
+import { remove } from "../Controller/tickets/remove.js"
 // Aqui, temos um array que contém os métodos que utilizaremos para lidar com os tickets, separados em objetos que contém: 
 // Método 
 // URL, onde estará acontecendo o método 
@@ -32,5 +32,10 @@ export const tickets = [
         path: "/tickets/:id/close", // adicionamos o /close porque queremos alterar esse status  
         controller: updateStatus
         // Controller específico para o método
+    },
+    { // Método para deletar um ticket 
+        method: "DELETE",
+        path: "/tickets/:id",
+        controller: remove
     }
 ]
